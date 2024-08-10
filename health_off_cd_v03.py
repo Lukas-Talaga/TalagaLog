@@ -5,6 +5,9 @@ from datetime import datetime
 import ast
 import matplotlib.dates as mdates
 
+# ChatGPT-4o, Stack Overflow, Geek for Geeks were consulted for inspiration and research
+# NumPy and Matplotlib were learned through Introduction to Data Science Algorithms (CSPB 3022)
+
 # Define node class for LinkedListStack that will store health data
 class StackNode:
     def __init__(self, data, next_node=None): # Next is None if this is the last node in the list
@@ -113,7 +116,7 @@ class HealthTrackerDict:
             plt.title(f"{metric_name} Over Time") 
             plt.xlabel("Date")
             plt.ylabel(metric_name)
-            plt.xticks(rotation=45) # Rotate dates to save space
+            plt.xticks(rotation=90) # Rotate dates to save space
             plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d')) # Change from plotting datetime to just date, no time
             plt.gca().xaxis.set_major_locator(mdates.DayLocator()) # Make sure each day is only plotted once
             plt.tight_layout()
@@ -145,6 +148,7 @@ class HealthTrackerDict:
                 plt.scatter(values_metric1, values_metric2)  # Plot data as scatterplot
                 plt.title(f"Correlation between {metric1} and {metric2}: {corr:.2f}")  # Round correlation and title plot
                 plt.xlabel(metric1)
+                plt.xticks(rotation=90) # Rotate dates to save space
                 plt.ylabel(metric2)
                 plt.show()
             else:
@@ -157,6 +161,8 @@ class HealthTrackerDict:
 def main():
     username = input("\nEnter your name: ")
     tracker = HealthTrackerDict(username)
+    file_name = tracker.username + ".csv"
+    tracker.load_data(file_name)
 
     while True: # Loop until user quits
         print("\n*Please only enter numbers or dates*")
